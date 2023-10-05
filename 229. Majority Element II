@@ -1,0 +1,35 @@
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int n=nums.length;
+        Arrays.sort(nums);
+        int digit=(int)Math.floor(n/3);
+        List<Integer>list=new ArrayList<Integer>();
+        HashMap<Integer,Integer>map=new HashMap<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            if(!map.containsKey(nums[i]))
+            {
+                 map.put(nums[i],1);  
+           }
+           else
+          {
+            int count=map.get(nums[i]);
+            map.put(nums[i],count+1);
+          }
+        }
+        
+        for(Map.Entry<Integer,Integer>mapelement:map.entrySet())
+        {
+           int key=mapelement.getKey();
+           int element=mapelement.getValue();
+
+           if(element>digit)
+           {
+               list.add(key);
+           }
+        }
+       
+       
+       return list;
+    }
+}
