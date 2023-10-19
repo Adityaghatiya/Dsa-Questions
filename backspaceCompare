@@ -1,0 +1,29 @@
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        // Use the helper function to build processed strings for s and t
+        String processedS = buildString(s);
+        String processedT = buildString(t);
+
+        // Compare the processed strings
+        return processedS.equals(processedT);
+    }
+
+    // Helper function to build a processed string with backspaces
+    private String buildString(String str) {
+        StringBuilder result = new StringBuilder();
+        int backspaceCount = 0;
+
+        for (int i = str.length() - 1; i >= 0; i--) {
+            char currentChar = str.charAt(i);
+            if (currentChar == '#') {
+                backspaceCount++;
+            } else if (backspaceCount > 0) {
+                backspaceCount--;
+            } else {
+                result.append(currentChar);
+            }
+        }
+
+        return result.toString();
+    }
+}
