@@ -1,0 +1,41 @@
+class Solution {
+    public String longestPalindrome(String s) {
+        int len = s.length();
+        boolean[][] dp = new boolean[len][len];
+        int maxLen = 0;  // Initialize the maximum length of a palindrome
+        int start = 0;   // Initialize the start index of the longest palindrome
+
+        // Initialize the base cases
+        for (int i = 0; i < len; i++) {
+            dp[i][i] = true;
+            maxLen = 1;  // Any single character is a palindrome of length 1
+            start = i;
+        }
+
+        // Check for palindromes of length 2
+        for (int i = 0; i < len - 1; i++) {
+            if (s.charAt(i) == s.charAt(i + 1)) {
+                dp[i][i + 1] = true;
+                maxLen = 2;  // Update maxLen to 2
+                start = i;
+            }
+        }
+
+        // Check for palindromes of length >= 3
+        for (int g = 3; g <= len; g++) {
+            for (int i = 0; i < len - g + 1; i++) {
+                int j = i + g - 1;
+                if (s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1]) {
+                    dp[i][j] = true;
+                    if (g > maxLen) {
+                        maxLen = g;
+                        start = i;
+                    }
+                }
+            }
+        }
+
+        // Extract and return the longest palindromic substring
+        return s.substring(start, start + maxLen);
+    }
+}
