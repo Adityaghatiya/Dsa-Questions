@@ -1,1 +1,1 @@
-# BinarySearch-Questions
+# DSA-Questions
