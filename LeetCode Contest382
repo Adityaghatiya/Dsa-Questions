@@ -1,0 +1,19 @@
+class Solution {
+    public int countKeyChanges(String s) {
+        if (s.length() == 1) {
+            return 0;
+        }
+
+        int count = 0;
+        for (int i = 1; i < s.length(); i++) {
+            char ch1 = s.charAt(i - 1);
+            char ch2 = s.charAt(i);
+
+            // Check if the characters are not equal (ignoring case)
+            if (Character.toUpperCase(ch1) != Character.toUpperCase(ch2) ) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
