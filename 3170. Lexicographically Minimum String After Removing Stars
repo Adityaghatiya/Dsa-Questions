@@ -1,0 +1,51 @@
+class Solution {
+   
+    public class p{
+      char c;
+    int i;
+   
+      public p(char c,int i)
+      {
+        this.c=c;
+        this.i=i;
+      }
+
+    }
+    public String clearStars(String s) {
+        char ch[]=s.toCharArray();
+
+        Queue<p>que=new PriorityQueue<>((a,b)->{
+            if(a.c==b.c)
+            {
+                return b.i-a.i;
+            }
+            return Character.compare(a.c,b.c);
+        });
+        
+        for(int i=0;i<ch.length;i++)
+        {   
+            char c=ch[i];
+            if(c!='*')
+            {
+                que.add(new p(c,i));
+            }
+            else if(!que.isEmpty()){
+                p pp=que.poll();
+
+                ch[pp.i]='*';
+
+            }
+        }
+        StringBuilder str=new StringBuilder();
+
+        for(int i=0;i<ch.length;i++)
+        {
+            if(ch[i]!='*')
+            {
+                str.append(ch[i]);
+            }
+        }
+
+        return str.toString();
+    }
+}
