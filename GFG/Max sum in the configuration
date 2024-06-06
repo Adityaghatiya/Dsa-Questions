@@ -1,0 +1,48 @@
+//TLE Solution=>
+
+class Solution {
+    long max_sum(int a[], int n) {
+        // Your code here
+        long maxSum=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            int sum=0;
+            for(int j=0;j<n;j++)
+            {
+                sum+=j*a[(i+j)%n];
+            }
+            maxSum=Math.max(sum,maxSum);
+        }
+        
+        return maxSum;
+    }
+}
+
+//Optimized Solution=>
+
+class Solution {
+    long max_sum(int a[], int n) {
+        // Your code here
+        long sum = 0;
+        long prevSum = 0;
+        
+        // Calculate the initial sum of the array and the initial rotation sum
+        for (int i = 0; i < n; i++) {
+            sum += a[i];
+            prevSum += (long)i * a[i];
+        }
+        
+        long maxSum = prevSum;
+        
+        // Calculate sums for other rotations
+        for (int i = 1; i < n; i++) {
+            // Compute the current sum based on the previous sum
+            long curr_sum = prevSum - (sum - a[i - 1]) +(long) a[i - 1] * (n - 1);
+            prevSum = curr_sum;
+            maxSum = Math.max(maxSum, curr_sum);
+        }
+        
+        return maxSum;
+    }
+}
